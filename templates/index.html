@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+<form action="/predict" method="POST">
+    <input type="file" name="img" id="img" onchange="encodeImgtoBase64(this)">    <br>
+    <img src="" alt="" id="displayImg" width="200"> <br>
+ 	<input type="hidden" id="mytext" name="mytext" >
+    <button type="submit">Submit</button>
+</form>
+</body>
+<script type="text/javascript">
+   function encodeImgtoBase64(element) {
+
+      var img = element.files[0];
+      var reader = new FileReader();
+      var data ;
+
+      reader.onloadend = function() {
+        $("#displayImg").attr("src", reader.result);
+        data = JSON.stringify(reader.result)
+        var e = document.getElementById("mytext")
+        e.setAttribute("value", data)
+      }
+      reader.readAsDataURL(img);
+
+    }
+</script>
+</html>
